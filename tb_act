@@ -1,0 +1,29 @@
+`timescale 1ns/1ps
+module alu_tb;
+
+    reg [3:0] A, B;
+    reg sal;
+    wire [3:0] Y;
+
+
+    alu uut (
+        .A(A),
+        .B(B),
+        .sal(sal),
+        .Y(Y)
+    );
+
+    initial begin
+        $monitor("Tiempo=%0t | A=%b | B=%b | sel=%b | Y=%b", 
+                  $time, A, B, sal, Y);
+
+       
+        A = 4'b0011; B = 4'b0101; sal = 0; #10; 
+        A = 4'b0011; B = 4'b0101; sal = 1; #10; 
+        A = 4'b1111; B = 4'b0001; sal = 0; #10; 
+        A = 4'b1111; B = 4'b1001; sal = 1; #10; 
+        A = 4'b0111; B = 4'b0111; sal = 0; #10; 
+
+        $finish;
+    end
+endmodule
